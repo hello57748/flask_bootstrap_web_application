@@ -1,0 +1,35 @@
+<!--
+#**********************************************************************
+# image.html
+# Name: Samuel Peters
+# Last Modified: 3/21/18
+# Course: CST 205
+# Description: homework #4, Creating a web application that displays some random images and has links for all of them.
+#********************************************************************** -->
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+  Picture
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <!-- title and author -->
+    {% for i in image_info %}
+      {% if i['id'] == image_id %}
+        <h1>"{{ i['title'] }}" by {{i['flickr_user']}}</h1>
+      {% endif %}
+    {% endfor %}
+
+    <!-- image -->
+    <img class="img-rounded img-responsive" src="{{ url_for('static', filename=('images/' + image_id + '.jpg')) }}">
+
+    <!-- mode, format, width, and height -->
+    <p>{{mode}} image in {{format}} format with width {{sizes[0]}} and height {{sizes[1]}}</p>
+
+    <!-- link back to main page -->
+    <a href="{{ url_for('home') }}">
+      <h1>Back to list of images</h1>
+    </a>
+  </div>
+{% endblock %}
